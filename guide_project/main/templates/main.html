@@ -7,21 +7,24 @@
 </head>
 <body>
     <nav class="menu">
-        <li><a href="/main">Главная</a></li>
-        <li><a href="/info">О нас</a></li>
+        <li><a href="{% url 'main' %}">Главная</a></li>
+        <li><a href="{% url 'info' %}">О нас</a></li>
     </nav>
 
+
+{% if user.is_authenticated %}
+<a href="profile">{{ user.username }}</a>
+{% else %}
 <button class="auth" type="button" onclick="openDialog()" id="auth_button">Войти</button>
-
-
 <dialog id="auth_dialog">
     <div class="window">
-        <a href="/auth">Авторизация</a>
-        <a href="/reg">Регистрация</a>
+        <a href="{% url 'auth' %}">Авторизация</a>
+        <a href="{% url 'reg' %}">Регистрация</a>
     </div>
     
     <button class="close" type="button" onclick="closeDialog()">Закрыть</button>
 </dialog>
+{% endif %}
 
 <script>
     const dialog = document.getElementById('auth_dialog');
