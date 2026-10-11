@@ -25,10 +25,15 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', views.main_page, name='main'),
-    path('sight/', views.sight_page, name='sight'),
+    path('sight/<uuid:id>/', views.sight_page, name='sight'),
     path('reg/', views.reg_page, name='reg'),
     path('auth/', views.auth_page, name='auth'),
     path('info/', views.info_page, name='info'),
+    path('del_profile/', views.delete_user, name='del_profile'),
+    path('profile/', views.profile_page, name='profile'),
+    path('edit_email/', views.edit_email, name='edit_email'),
+    path('edit_password', views.edit_password, name='edit_password'),
+    path('edit_username', views.edit_username, name='edit_username'),
 ]
 
 

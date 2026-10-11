@@ -1,0 +1,211 @@
+/* ==========================================================================
+   1. СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   2. ГЛАВНЫЙ КОНТЕЙНЕР ПРОФИЛЯ И ТЕКСТОВЫЕ ДАННЫЕ
+   ========================================================================== */
+.profile {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 550px; /* Оптимальная ширина для ЛК */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 16px;
+    color: #495057;
+}
+
+/* Стилизация сырого вывода переменных {{ user_id }}, {{ username }}, {{ email }} */
+.profile > text, 
+.profile {
+    font-weight: 500;
+}
+
+/* Оформляем первые три строчки данных (ID, Имя, Email) более аккуратно */
+.profile::before {
+    content: "Личный кабинет";
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   3. СЕКЦИЯ РЕДАКТИРОВАНИЯ (PROFILE-SECTION)
+   ========================================================================== */
+.profile-section {
+    margin-top: 25px;
+    border-top: 1px solid #dee2e6;
+    padding-top: 25px;
+}
+
+.profile-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   4. ВЫПАДАЮЩИЕ БЛОКИ ДАННЫХ (DETAILS / ACCORDION)
+   ========================================================================== */
+.edit-field {
+    background-color: #f1f3f5;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: background-color 0.2s ease;
+}
+
+.edit-field[open] {
+    background-color: #e9ecef;
+}
+
+.field-summary {
+    padding: 15px 20px;
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+.field-summary:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Особый стиль для кнопки удаления профиля */
+.delete-summary {
+    color: #dc3545;
+}
+
+.delete-summary:hover {
+    background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Форма внутри details */
+.edit-form {
+    padding: 0 20px 20px 20px;
+    animation: slideDown 0.2s ease-out; /* Плавное появление */
+}
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+/* Поля ввода */
+.form-input {
+    flex: 1; /* Растягивает инпут на максимум */
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+}
+
+/* Кнопки */
+.form-btn {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap; /* Запрещает перенос текста на кнопке */
+    transition: background-color 0.2s ease;
+}
+
+.form-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Блок удаления аккаунта */
+.warn-text {
+    font-size: 14px;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    width: 100%; /* Кнопка удаления будет на всю ширину */
+}
+
+.delete-btn:hover {
+    background-color: #bd2130;
+}
+
+/* ==========================================================================
+   5. АНИМАЦИИ И АДАПТИВНОСТЬ
+   ========================================================================== */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 580px) {
+    body {
+        padding: 10px;
+    }
+
+    .profile {
+        padding: 25px 15px;
+        border-radius: 12px;
+        box-shadow: none; /* Убираем тень на телефонах */
+        background-color: #ffffff;
+    }
+
+    /* На смартфонах перестраиваем инпут и кнопку в столбик */
+    .form-group {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-input {
+        width: 100%;
+        font-size: 16px; /* Защита от автозума в iOS */
+    }
+
+    .form-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}

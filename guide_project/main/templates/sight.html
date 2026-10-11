@@ -1,11 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/sight.css" rel="stylesheet">
     <title>Достопримечательность</title>
 </head>
-<body>
-    <p>пока ничего</p>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    
+                    {% if form.image %}
+                        <img src="{{ form.image.url }}" class="card-img-top img-fluid" alt="{{ form.name }}" style="max-height: 450px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="card-body p-4">
+                        <h1 class="card-title h2 mb-3">{{ form.name }}</h1>
+                        <p class="card-text text-secondary" style="white-space: pre-line;">
+                            {{ form.description }}
+                        </p>
+                        <a href="{{ form.url_sight }}">Узнать маршрут</a>
+                    </div>
+                    {% if state is False %}
+                    <details class="review_write">
+                        <summary>Написать отзыв</summary>
+                        <form method="post" action="{% url 'sight' id %}">{% csrf_token %}
+                            <table class="review_table">
+                                {{ review_form.as_table }}
+                            </table>
+                            <button type="submit">Отправить</button>
+                        </form>
+                    </details>
+                    {% elif state is True %}
+                        <p class="description-review">Вы уже написали свой отзыв!</p>
+                    {% endif %}
+                    <div class="all_review">
+                        <ul>
+                        {% for i in reviews %}
+                            <li>
+                                <p class="username-review">{{i.username}}</p>
+                                <p class="grade-review">{{i.grade}} &#10024</p>
+                                <p class="description-review">{{i.description}}</p>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

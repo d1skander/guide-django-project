@@ -1,11 +1,78 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/profile.css" rel="stylesheet">
     <title>Личный кабинет</title>
 </head>
 <body>
-    <p>ничего пока что</p>
+    <div class="profile">
+        <p>id: {{ user_id }}</p>
+        <p>username: {{ username }}</p>
+        <p>email: {{ email }}</p>
+<div class="profile-section">
+    <h3 class="profile-title">Изменить профиль</h3>
+    
+    <!-- Смена логина -->
+    <details class="edit-field">
+        <summary class="field-summary">Смена логина</summary>
+        <form action="{% url 'edit_username' %}" method="POST" class="edit-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="username" class="form-input" placeholder="Новый логин" required>
+                <button type="submit" class="form-btn">Поменять логин</button>
+            </div>
+        </form>
+    </details>
+
+    <!-- Смена почты -->
+    <details class="edit-field">
+        <summary class="field-summary">Смена почты</summary>
+        <form action="{% url 'edit_email' %}" method="POST" class="edit-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="email" name="email" class="form-input" placeholder="Новый email" required>
+                <button type="submit" class="form-btn">Поменять почту</button>
+            </div>
+        </form>
+    </details>
+
+    <!-- Смена пароля -->
+    <details class="edit-field">
+        <summary class="field-summary">Смена пароля</summary>
+        <form action="{% url 'edit_password' %}" method="POST" class="edit-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="password" name="password" class="form-input" placeholder="Новый пароль" required>
+                <button type="submit" class="form-btn">Поменять пароль</button>
+            </div>
+        </form>
+    </details>
+
+    <!-- Удаление профиля -->
+    <details class="edit-field">
+        <summary class="field-summary delete-summary">Удаление профиля</summary>
+        <form action="{% url 'del_profile' %}" method="POST" class="edit-form" onsubmit="return confirm('Вы уверены, что хотите удалить профиль? Это действие необратимо.');">
+            {% csrf_token %}
+            <p class="warn-text">Внимание! Все ваши данные будут безвозвратно удалены.</p>
+            <button type="submit" class="form-btn delete-btn">Удалить аккаунт</button>
+        </form>
+    </details>
+</div>
+
+<!-- JS для эффекта аккордеона (при открытии одного — закрываются другие) -->
+<script>
+    document.querySelectorAll('.edit-field').forEach(el => {
+        el.addEventListener('toggle', function() {
+            if (this.open) {
+                document.querySelectorAll('.edit-field').forEach(other => {
+                    if (other !== this) other.removeAttribute('open');
+                });
+            }
+        });
+    });
+</script>
 </body>
 </html>

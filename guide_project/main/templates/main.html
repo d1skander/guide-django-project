@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/main.css" rel="stylesheet">
     <title>Главная страница</title>
 </head>
 <body>
@@ -13,18 +15,43 @@
 
 
 {% if user.is_authenticated %}
-<a href="profile">{{ user.username }}</a>
+    <a href="{% url 'profile' %}">{{ user.username }}</a>
 {% else %}
-<button class="auth" type="button" onclick="openDialog()" id="auth_button">Войти</button>
+    <button class="auth" type="button" onclick="openDialog()" id="auth_button">Войти</button>
+{% endif %}
+
+
 <dialog id="auth_dialog">
     <div class="window">
         <a href="{% url 'auth' %}">Авторизация</a>
         <a href="{% url 'reg' %}">Регистрация</a>
     </div>
-    
     <button class="close" type="button" onclick="closeDialog()">Закрыть</button>
 </dialog>
-{% endif %}
+
+
+<div class="sight">
+    <ul>
+        {% for i in form %}
+            <li>
+                <div class="image-wrapper">
+                    {% if i.image.url %}
+                        <a href="{% url 'sight' i.id %}">
+                            <img src="{{ i.image.url }}" alt="{{ i.name }}">
+                        </a>
+                    {% else %}
+                    <a href="{% url 'sight' i.id %}">
+                        <img src="/image/default.png" alt="{{ i.name }}">
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="title">{{ i.name }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
 
 <script>
     const dialog = document.getElementById('auth_dialog');

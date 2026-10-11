@@ -1,11 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Достопримечательность</title>
+    <link href="/static/info.css" rel="stylesheet">
+    <title>О нас</title>
 </head>
 <body>
-    <p>пока ничего</p>
+    <nav class="menu">
+        <li><a href="{% url 'main' %}">Главная</a></li>
+        <li><a href="{% url 'info' %}">О нас</a></li>
+    </nav>
+
+    <div class="info">
+    <ul>
+        {% for i in form %}
+            <li>
+                <div class="image">
+                    {% if i.image.url %}
+                        <img src="{{ i.image.url }}">
+                    {% else %}
+                        <img src="/image/default.png">
+                    {% endif %}
+                </div>
+                <div class="title">{{ i.description }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 </html>

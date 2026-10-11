@@ -1,0 +1,308 @@
+/* ==========================================================================
+   1. СБРОС СТИЛЕЙ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body.bg-light {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.6;
+}
+
+/* Контейнеры (Bootstrap-подобная структура средствами CSS) */
+.container {
+    width: 100%;
+    max-width: 800px; /* col-md-8 эквивалент */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   2. КАРТОЧКА ДОСТОПРИМЕЧАТЕЛЬНОСТИ
+   ========================================================================== */
+.card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Изображение */
+.card-img-top {
+    width: 100%;
+    display: block;
+    /* Инлайновые стили HTML (max-height: 450px; object-fit: cover;) приоритетнее, 
+       но здесь мы страхуем их адаптивность */
+    height: auto;
+}
+
+/* Контентная часть */
+.card-body {
+    padding: 30px;
+}
+
+.card-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    color: #495057;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Ссылка на маршрут */
+.card-body a[href] {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.card-body a[href]:hover {
+    background-color: #0056b3;
+}
+
+/* ==========================================================================
+   3. ФОРМА ОТЗЫВА (DETAILS & FORM)
+   ========================================================================== */
+.review_write {
+    margin: 0 30px 25px 30px;
+    padding: 15px;
+    background-color: #f1f3f5;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.review_write[open] {
+    background-color: #e9ecef;
+}
+
+.review_write summary {
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+}
+
+.review_write form {
+    margin-top: 15px;
+}
+
+/* Таблица формы Django (`review_form.as_table`) */
+.review_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.review_table td {
+    padding: 8px 0;
+    vertical-align: top;
+}
+
+/* Стилизация меток полей (label) */
+.review_table label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #495057;
+    display: block;
+    margin-top: 6px;
+    padding-right: 15px;
+}
+
+/* Стилизация самих полей ввода Django (input, select, textarea) */
+.review_table input,
+.review_table select,
+.review_table textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease;
+}
+
+.review_table input:focus,
+.review_table select:focus,
+.review_table textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.review_table textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Кнопка отправки */
+.review_write button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review_write button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Сообщение «Вы написали свой отзыв» */
+p.description-review:not(li p) {
+    margin: 0 30px 25px 30px;
+    padding: 12px 20px;
+    background-color: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* ==========================================================================
+   4. СПИСОК ВСЕХ ОТЗЫВОВ (ALL REVIEWS)
+   ========================================================================== */
+.all_review {
+    padding: 0 30px 30px 30px;
+    border-top: 1px solid #dee2e6;
+    margin-top: 10px;
+}
+
+.all_review ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.all_review li {
+    background-color: #fafafa;
+    border: 1px solid #e9ecef;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-areas: 
+        "user grade"
+        "desc desc";
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.username-review {
+    grid-area: user;
+    font-weight: 700;
+    color: #212529;
+}
+
+.grade-review {
+    grid-area: grade;
+    font-weight: 700;
+    color: #ffc107; /* Золотой цвет для оценки */
+    background: #fff9e6;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.all_review li .description-review {
+    grid-area: desc;
+    color: #495057;
+    font-size: 15px;
+    white-space: pre-wrap; /* Сохраняет переносы строк в отзывах */
+}
+
+/* ==========================================================================
+   5. АДАПТИВНОСТЬ (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 24px;
+    }
+
+    .review_write, 
+    .all_review,
+    p.description-review:not(li p) {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .all_review {
+        padding-bottom: 20px;
+    }
+
+    /* На планшетах и телефонах делаем таблицу отзывов вертикальной */
+    .review_table tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    
+    .review_table td {
+        padding: 4px 0;
+    }
+    
+    .review_table label {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-body {
+        padding: 15px;
+    }
+
+    .review_write, 
+    .all_review,
+    p.description-review:not(li p) {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .card-body a[href] {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Отзыв на совсем маленьких экранах выстраивается в один столбец */
+    .all_review li {
+        grid-template-areas: 
+            "user"
+            "grade"
+            "desc";
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .grade-review {
+        align-self: flex-start;
+    }
+}
