@@ -3,25 +3,25 @@
 
 > # Команды для запуска и настройки приложения
 > > Скачивание uv
-> > > Windows
-> > > > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-> > > > > > > > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/0.13.0/install.ps1 | iex"
-> > > Linux и MacOs
-> > > > curl -LsSf https://astral.sh/uv/install.sh | sh
-> > > > wget -qO- https://astral.sh/uv/install.sh | sh
-> > > > curl -LsSf https://astral.sh/uv/0.13.0/install.sh | sh
+    1. Windows
+        1. powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+        2. powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/0.13.0/install.ps1 | iex"
+    2. Linux и MacOs
+        1. curl -LsSf https://astral.sh/uv/install.sh | sh
+        2. wget -qO- https://astral.sh/uv/install.sh | sh
+        3. -LsSf https://astral.sh/uv/0.13.0/install.sh | sh
 
 
 > > Команды django
-> > > > uv run guide_project/manage.py runserver
-> > > > uv run guide_project/manage.py makemigrations
-> > > > uv run guide_project/manage.py migrate
-> > > > uv run guide_project/manage.py createsuperuser
+    1. uv run guide_project/manage.py runserver
+    2. uv run guide_project/manage.py makemigrations
+    3. uv run guide_project/manage.py migrate
+    4. uv run guide_project/manage.py createsuperuser
 
 
 > # Полезные документации
-> > [Uv doc][1]
-> > [Django doc][2]
+1. [Uv doc][1]
+2. [Django doc][2]
 
 
 [1]: https://docs.astral.sh/uv/getting-started/installation/
